@@ -18,11 +18,19 @@ wifi.on('connect', function(res) {
 });
 
 wifi.on('timeout', function() {
-  console.log("WiFi conection timed out");
+  console.log("WiFi conection timed out. Retrying...");
+  wifi.connect({
+    ssid: wiFiSsid,
+    password: wiFiPassword
+  });
 });
 
 wifi.on('disconnect', function() {
-  console.log("WiFi is disconnected :(");
+  console.log("WiFi is disconnected :( Retrying...");
+  wifi.connect({
+    ssid: wiFiSsid,
+    password: wiFiPassword
+  });
 });
 
 var door = new Door();
