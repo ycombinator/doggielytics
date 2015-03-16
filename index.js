@@ -1,6 +1,27 @@
 var tessel = require('tessel'),
     accel = require('accel-mma84').use(tessel.port['A']),
+    wifi = require('wifi-cc3000'),
     Door = require('./lib/door.js');
+
+var wiFiSsid = process.argv[2];
+var wiFiPassword = process.argv[3];
+
+wifi.connect({
+  ssid: wiFiSsid,
+  password: wiFiPassword
+});
+
+wifi.on('connect', function(res) {
+  console.log("WiFi is connected. IP address = " + res.ip);
+});
+
+wifi.on('timeout', function() {
+  console.log("WiFi conection timed out");
+});
+
+wifi.on('disconnect', function() {
+  console.log("WiFi is disconnected :(");
+});
 
 var door = new Door();
 
