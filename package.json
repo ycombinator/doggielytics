@@ -1,0 +1,17 @@
+{
+  "name": "doggielytics",
+  "version": "0.0.1",
+  "description": "Tracking my dog's visits to the backyard",
+  "author": "Shaunak Kashyap <ycombinator@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ycombinator/doggielytics"
+  },
+  "keywords": [
+    "tessel",
+    "iot"
+  ],
+  "dependencies": {
+    "accel-mma84": "0.2.x"
+  }
+}
