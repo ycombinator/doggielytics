@@ -2,11 +2,9 @@ var tessel = require('tessel'),
     accel = require('accel-mma84').use(tessel.port['A']),
     Door = require('./lib/door.js');
 
-var door = Door();
+var door = new Door();
 
-// Initialize the accelerometer.
 accel.on('ready', function () {
-  // Stream accelerometer data
   accel.on('data', function (xyz) {
     var x = xyz[0];
     if (x >= -0.9) {
@@ -17,6 +15,15 @@ accel.on('ready', function () {
   });
 });
 
-accel.on('error', function(err){
+accel.on('error', function(err) {
   console.log('Error:', err);
+});
+
+door.on('visit-start', function() {
+  console.log('Visit started');
+});
+
+door.on('visit-end', function(visit) {
+  var visitSeconds = (visit._endTime.getTime() - visit._startTime.getTime()) / 1000;
+  console.log('Visit ended; duration = ' + visitSeconds + ' seconds.');
 });
