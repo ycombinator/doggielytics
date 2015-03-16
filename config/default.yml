@@ -1,3 +1,0 @@
-elasticsearch:
-  host: "http://localhost:9200"
-  index: doggielytics
