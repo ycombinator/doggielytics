@@ -12,6 +12,7 @@
     "iot"
   ],
   "dependencies": {
-    "accel-mma84": "0.2.x"
+    "accel-mma84": "0.2.x",
+    "config": "1.12.x",
   }
 }

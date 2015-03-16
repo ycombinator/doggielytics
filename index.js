@@ -1,5 +1,6 @@
 var tessel = require('tessel'),
     accel = require('accel-mma84').use(tessel.port['A']),
+    config = require('config'),
     Door = require('./lib/door.js');
 
 var door = new Door();
