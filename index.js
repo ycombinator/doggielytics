@@ -66,6 +66,6 @@ door.on('visit-end', function(visit) {
       console.log("Indexed visit. ID = " + body._id);
     });
   } else {
-    console.warn('WiFi is not connected.');
+    console.warn('WiFi is not connected. Cannot index visit :(');
   }
 });
