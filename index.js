@@ -20,6 +20,5 @@ accel.on('error', function(err) {
 });
 
 door.on('visit-end', function(visit) {
-  var visitSeconds = (visit._endTime.getTime() - visit._startTime.getTime()) / 1000;
-  console.log('Visit ended; duration = ' + visitSeconds + ' seconds.');
+  return console.log("Visit just ended: " + JSON.stringify(visit));
 });
