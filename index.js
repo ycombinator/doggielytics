@@ -39,7 +39,7 @@ accel.on('ready', function () {
   console.log('Accelerometer ready...');
   accel.on('data', function (xyz) {
     var x = xyz[0];
-    if (x >= -0.9) {
+    if (x >= -0.99) {
       door.open();
     } else {
       door.close();
