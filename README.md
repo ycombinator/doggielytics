@@ -3,14 +3,21 @@ Uses Tessel with the Accelerometer module to track my dog's visits to the backya
 ## Deployment
 
 ### Software
+
+#### Step 1. Install dependencies
+```
+$ npm install
+```
+
+#### Step 2. Push software to Tessel
 ```
 $ tessel push index.js \
     --args <WiFi SSID> \
     --args <WiFi Password> \
     --args <Elasticsearch node HTTP address>
 ```
-`
-Example:
+
+##### Example:
 
 ```
 $ tessel push index.js \
