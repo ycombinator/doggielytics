@@ -46,6 +46,20 @@ accel.on('error', function(err) {
   console.log('Error:', err);
 });
 
+accel.on('ready', function () {
+  console.log('Accelerometer ready...');
+
+  // Attempt wifi connection after 10 seconds; for some bizzare
+  // reason this delay is required when the board is powered
+  // standalone (as opposed to being connected to a computer)
+  setTimeout(function() {
+    wifi.connect({
+      ssid: wiFiSsid,
+      password: wiFiPassword
+    });
+  }, 7 * 1000);
+});
+
 door.on('visit-end', function(visit) {
   console.log("Visit just ended: " + JSON.stringify(visit));
   if (wifi.isConnected()) {
@@ -59,8 +73,7 @@ door.on('visit-end', function(visit) {
         }
         console.log("Indexed visit. ID = " + JSON.stringify(resp.body));
       }
-      console.log("Indexed visit. ID = " + body._id);
-    });
+    );
   } else {
     console.warn('WiFi is not connected. Cannot index visit :(');
   }
