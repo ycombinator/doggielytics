@@ -13,6 +13,6 @@
   ],
   "dependencies": {
     "accel-mma84": "0.2.x",
-    "request": "2.53.x"
+    "needle": "0.9.x"
   }
 }

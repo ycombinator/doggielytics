@@ -1,17 +1,12 @@
 var tessel = require('tessel'),
     accel = require('accel-mma84').use(tessel.port['A']),
     wifi = require('wifi-cc3000'),
-    request = require('request'),
+    needle = require('needle'),
     Door = require('./lib/door.js');
 
 var wiFiSsid = process.argv[2];
 var wiFiPassword = process.argv[3];
 var esBaseUrl = process.argv[4];
-
-wifi.connect({
-  ssid: wiFiSsid,
-  password: wiFiPassword
-});
 
 wifi.on('connect', function(res) {
   console.log("WiFi is connected. IP address = " + res.ip);
@@ -54,14 +49,15 @@ accel.on('error', function(err) {
 door.on('visit-end', function(visit) {
   console.log("Visit just ended: " + JSON.stringify(visit));
   if (wifi.isConnected()) {
-    request({
-      url: esBaseUrl + '/doggielytics/visits',
-      method: 'POST',
-      body: visit,
-      json: true
-    }, function(err, resp, body) {
-      if (err) {
-        return console.error(err);
+    needle.post(
+      esBaseUrl + '/doggielytics/visits',
+      visit,
+      { json: true },
+      function(err, resp) {
+        if (err) {
+          return winston.error(err);
+        }
+        console.log("Indexed visit. ID = " + JSON.stringify(resp.body));
       }
       console.log("Indexed visit. ID = " + body._id);
     });
