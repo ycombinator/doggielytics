@@ -30,16 +30,13 @@ wifi.on('disconnect', function() {
 
 var door = new Door();
 
-accel.on('ready', function () {
-  console.log('Accelerometer ready...');
-  accel.on('data', function (xyz) {
-    var x = xyz[0];
-    if (x >= -0.99) {
-      door.open();
-    } else {
-      door.close();
-    }
-  });
+accel.on('data', function (xyz) {
+  var x = xyz[0];
+  if (x >= -0.99) {
+    door.open();
+  } else {
+    door.close();
+  }
 });
 
 accel.on('error', function(err) {
