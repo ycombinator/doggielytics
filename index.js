@@ -13,7 +13,7 @@ wifi.on('connect', function(res) {
 });
 
 wifi.on('timeout', function() {
-  console.log("WiFi conection timed out. Retrying...");
+  console.log("WiFi conection timed out. Retrying connection...");
   wifi.connect({
     ssid: wiFiSsid,
     password: wiFiPassword
@@ -21,7 +21,7 @@ wifi.on('timeout', function() {
 });
 
 wifi.on('disconnect', function() {
-  console.log("WiFi is disconnected :( Retrying...");
+  console.log("WiFi is disconnected :( Retrying connection...");
   wifi.connect({
     ssid: wiFiSsid,
     password: wiFiPassword
