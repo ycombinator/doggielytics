@@ -23,8 +23,10 @@ var blink = function(led, numberOfTimes) {
   }, 200);
 };
 
+// Blink the blue LED 5 times
 blink(leds.blue, 5);
 
+// Try to connect to WiFi after 7 seconds
 setTimeout(function() {
   wifi.connect({
     ssid: wiFiSsid,
