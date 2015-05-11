@@ -4,6 +4,7 @@ var tessel = require('tessel'),
 
 var wiFiSsid = process.argv[2];
 var wiFiPassword = process.argv[3];
+var requestBinUrl = process.argv[4];
 
 var leds = {
   green: tessel.led[0],
@@ -37,7 +38,7 @@ setInterval(function() {
     console.log("Attempting to send heartbeat message #" + numRequestsAttempted + "...");
     if (wifi.isConnected()) {
       needle.post(
-        "http://requestb.in/y2n01py2",
+        requestBinUrl,
         {
             message: "WiFi is still connected!",
             numRequestsAttempted: numRequestsAttempted
@@ -62,7 +63,7 @@ wifi.on('connect', function(res) {
   blink(leds.green, 3);
   console.log("WiFi is connected. IP address = " + res.ip);
   needle.post(
-    "http://requestb.in/y2n01py2", 
+    requestBinUrl,
     {
         message: "WiFi just (re)connected",
         numWiFiConnects: numWiFiConnects
