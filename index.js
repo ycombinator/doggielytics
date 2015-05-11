@@ -2,18 +2,19 @@ var tessel = require('tessel'),
     accel = require('accel-mma84').use(tessel.port['A']),
     wifi = require('wifi-cc3000'),
     needle = require('needle'),
-    Door = require('./lib/door.js');
+    Door = require('./lib/door.js'),
+    logger = require('./lib/logger.js');
 
 var wiFiSsid = process.argv[2];
 var wiFiPassword = process.argv[3];
 var esBaseUrl = process.argv[4];
 
 wifi.on('connect', function(res) {
-  console.log("WiFi is connected. IP address = " + res.ip);
+  logger.info("WiFi is connected. IP address = " + res.ip);
 });
 
 wifi.on('timeout', function() {
-  console.log("WiFi conection timed out. Retrying connection...");
+  logger.info("WiFi conection timed out. Retrying connection...");
   wifi.connect({
     ssid: wiFiSsid,
     password: wiFiPassword
@@ -21,7 +22,7 @@ wifi.on('timeout', function() {
 });
 
 wifi.on('disconnect', function() {
-  console.log("WiFi is disconnected :( Retrying connection...");
+  logger.info("WiFi is disconnected :( Retrying connection...");
   wifi.connect({
     ssid: wiFiSsid,
     password: wiFiPassword
@@ -31,7 +32,7 @@ wifi.on('disconnect', function() {
 var door = new Door();
 
 accel.on('ready', function () {
-  console.log('Accelerometer ready...');
+  logger.info('Accelerometer ready...');
 
   // // Attempt wifi connection after 10 seconds; for some bizzare
   // // reason this delay is required when the board is powered
@@ -53,25 +54,25 @@ accel.on('ready', function () {
   });
 
   accel.on('error', function(err) {
-    console.log('Error:', err);
+    logger.info('Error:', err);
   });
 
   door.on('visit-end', function(visit) {
-    console.log("Visit just ended: " + JSON.stringify(visit));
+    logger.info("Visit just ended: " + JSON.stringify(visit));
     if (wifi.isConnected()) {
       needle.post(
-        esBaseUrl + '/doggielytics/visits',
+        esBaseUrl + '/doggielytics/visit',
         visit,
         { json: true },
         function(err, resp) {
           if (err) {
-            return winston.error(err);
+            return logger.error(err);
           }
-          console.log("Indexed visit. ID = " + JSON.stringify(resp.body));
+          logger.info("Indexed visit. ID = " + JSON.stringify(resp.body));
         }
       );
     } else {
-      console.warn('WiFi is not connected. Cannot index visit :(');
+      logger.warn('WiFi is not connected. Cannot index visit :(');
     }
   });
 
