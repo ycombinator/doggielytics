@@ -3,7 +3,8 @@ var tessel = require('tessel'),
     wifi = require('wifi-cc3000'),
     Door = require('./lib/door.js'),
     Logger = require('./lib/logger.js'),
-    ElasticsearchIndexer = require('./lib/es_indexer.js');
+    ElasticsearchIndexer = require('./lib/es_indexer.js'),
+    ClockSync = require('./lib/clock_sync.js');
 
 var wiFiSsid = process.argv[2];
 var wiFiPassword = process.argv[3];
@@ -18,6 +19,9 @@ var logger = new Logger({
 var INDEX_NAME = 'doggielytics';
 var VISIT_TYPE = 'visit';
 var esVisitIndexer = new ElasticsearchIndexer(esBaseUrl, INDEX_NAME, VISIT_TYPE);
+
+// Create a ClockSync object to keep onboard clock in sync with NTP time
+new ClockSync(logger);
 
 wifi.on('connect', function(res) {
   logger.info("WiFi is connected. IP address = " + res.ip);
