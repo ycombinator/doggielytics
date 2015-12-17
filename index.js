@@ -72,6 +72,10 @@ accel.on('ready', function () {
     logger.info('Error:', err);
   });
 
+  door.on('visit-start', function() {
+    logger.info("Visit just started");
+  });
+
   door.on('visit-end', function(visit) {
     logger.info("Visit just ended: " + JSON.stringify(visit));
     esVisitIndexer.index(visit);
