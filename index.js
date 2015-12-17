@@ -17,7 +17,7 @@ var logger = new Logger({
 });
 
 // Create an Elasticsearch indexer for indexing visits
-var INDEX_NAME = 'doggielytics';
+var INDEX_NAME = 'visits';
 var VISIT_TYPE = 'visit';
 var esVisitIndexer = new ElasticsearchIndexer(esBaseUrl, INDEX_NAME, VISIT_TYPE);
 
