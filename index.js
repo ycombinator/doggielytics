@@ -1,6 +1,7 @@
 var tessel = require('tessel'),
     accel = require('accel-mma84').use(tessel.port['A']),
     wifi = require('wifi-cc3000'),
+    date_parts = require('./lib/date_parts.js'),
     Door = require('./lib/door.js'),
     Logger = require('./lib/logger.js'),
     ElasticsearchIndexer = require('./lib/es_indexer.js')
