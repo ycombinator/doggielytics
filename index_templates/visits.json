@@ -1,0 +1,30 @@
+{
+	"template": "visits*",
+	"settings" : {
+        "number_of_shards" : 1
+    },
+  "mappings" : {
+		"visit": {
+			"_source": {
+				"enabled": false
+			},
+			"_all": {
+				"enabled": false
+			},
+			"properties": {
+				"startTimeDateParts": {
+					"properties": {
+						"dayOfWeekStr": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"monthStr": {
+							"type": "string",
+							"index": "not_analyzed"
+						}
+					}
+				}
+			}
+		}
+	}
+}

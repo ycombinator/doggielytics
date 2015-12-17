@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Creates the doggielytics index templates
+# Usage: init <Elasticsearch node HTTP address>
+
+# Determine script path
+pushd `dirname $0` > /dev/null
+SCRIPT_PATH=`pwd`
+popd > /dev/null
+
+# Get ES node address
+es_node_address=$1
+if [ -z "$es_node_address" ]; then
+	echo "Usage: init <Elasticsearch node HTTP address>" >&2
+	exit 1
+fi
+
+# Determine index templates path
+TEMPLATES_PATH=$SCRIPT_PATH/../index_templates
+
+for filename in $TEMPLATES_PATH/*; do
+
+	# Determine template name from filename
+	template_name=$(basename $filename)
+	template_name=${template_name/.json/}
+
+	# Create template
+	echo "Creating template $template_name..."
+	curl -XPUT $es_node_address/_template/$template_name -d@$filename
+	echo
+
+done

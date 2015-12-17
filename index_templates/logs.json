@@ -1,0 +1,16 @@
+{
+	"template": "logs*",
+	"settings" : {
+        "number_of_shards" : 1
+    },
+  "mappings" : {
+		"log": {
+			"properties": {
+				"level": {
+					"type": "string",
+					"index": "not_analyzed"
+				}				
+			}
+		}
+	}
+}
