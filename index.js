@@ -47,7 +47,7 @@ wifi.on('disconnect', function() {
 var door = new Door();
 
 accel.on('ready', function () {
-  logger.info('Accelerometer ready...');
+  logger.info('Accelerometer ready');
 
   // // Attempt wifi connection after 10 seconds; for some bizzare
   // // reason this delay is required when the board is powered
