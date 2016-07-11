@@ -21,6 +21,9 @@ const FLAPPING_MAX_DURATION_MILLIS = 5 * 1000;
 let flappingTimeoutId;
 let message;
 
+// Set timezone
+process.env.TZ = config.timezone || 'Etc/UTC';
+
 // Initialize state
 let isFlapping = false;
 
