@@ -1,0 +1,21 @@
+{
+  "name": "doggielytics",
+  "version": "0.0.0",
+  "description": "Tracking my dogs visit to the backyard",
+  "main": "index.js",
+  "dependencies": {
+    "accel-mma84": "~0.2.4",
+    "elasticsearch": "~11.0.1",
+    "needle": "~1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git://github.com/ycombinator/doggielytics.git",
+  "keywords": [
+    "Tessel"
+  ],
+  "license": "MIT",
+  "readme": "A bare bones Tessel 2 blinky script."
+}
