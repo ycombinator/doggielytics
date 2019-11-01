@@ -6,7 +6,7 @@ Uses Tessel with the Accelerometer module to track my dog's visits to the backya
 
 #### Step 1. Install dependencies
 ```
-$ npm install
+$ yarn install
 ```
 
 #### Step 2. Push software to Tessel
