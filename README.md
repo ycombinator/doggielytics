@@ -4,6 +4,11 @@ Uses Tessel with the Accelerometer module to track my dog's visits to the backya
 
 ### Software
 
+#### Step 0. Install pre-requisites
+```
+$ yarn global add t2-cli
+```
+
 #### Step 1. Install dependencies
 ```
 $ yarn install
@@ -11,7 +16,7 @@ $ yarn install
 
 #### Step 2. Push software to Tessel
 ```
-$ tessel push index.js \
+$ t2 push index.js \
     --args <WiFi SSID> \
     --args <WiFi Password> \
     --args <Elasticsearch node HTTP address>
@@ -20,7 +25,7 @@ $ tessel push index.js \
 ##### Example:
 
 ```
-$ tessel push index.js \
+$ t2 push index.js \
     --args mywifi \
     --args Sup3rSecr3t \
     --args http://192.168.2.11:9200
