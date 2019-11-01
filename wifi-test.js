@@ -10,7 +10,7 @@ console.log({ args: process.argv, wiFiSsid, wiFiPassword, requestBinUrl })
 const connectionSettings = {
   ssid: wiFiSsid,
   password: wiFiPassword,
-  security: 'wep'
+  security: 'wpa2'
 }
 
 var leds = {
